@@ -64,6 +64,12 @@ static const char *colors[][3]      = {
 
 /* tagging */
 static char *tags[] = {"󰞷", "", "", "", ""};
+static const char* eww[] = { "eww", "open" , "eww", NULL };
+
+static const Launcher launchers[] = {
+    /* command     name to display */
+    { eww,         "" },
+};
 
 static const int tagschemes[] = {
     SchemeTag1, SchemeTag2, SchemeTag3, SchemeTag4, SchemeTag5
@@ -142,9 +148,9 @@ static const Key keys[] = {
     { MODKEY,                            XK_w,       spawn,          {.v = wall_change}},
 
     // screenshot fullscreen and cropped
-    {MODKEY|ControlMask,                XK_u,       spawn,
+    {MODKEY|ControlMask,                XK_Print,       spawn,
         SHCMD("maim | xclip -selection clipboard -t image/png")},
-    {MODKEY,                            XK_u,       spawn,
+    {MODKEY,                            XK_Print,       spawn,
         SHCMD("maim --select | xclip -selection clipboard -t image/png")},
 
     { MODKEY,                           XK_c,       spawn,          SHCMD("rofi -show drun") },
@@ -225,7 +231,7 @@ static const Key keys[] = {
     { MODKEY|ShiftMask,                 XK_w,       setborderpx,    {.i = default_border } },
 
     // kill dwm
-    { MODKEY|ControlMask,               XK_q,       spawn,        SHCMD("killall bar.sh dwm") },
+    { MODKEY|ControlMask,               XK_q,       spawn,        SHCMD("killall bar.sh chadwm") },
 
     // kill window
     { MODKEY,                           XK_q,       killclient,     {0} },
