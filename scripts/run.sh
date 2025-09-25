@@ -5,7 +5,9 @@ xbacklight -set 10 &
 xset r rate 200 50 &
 picom &
 xrandr --output HDMI-1-0 --mode 2560x1080 --refresh 75 --left-of eDP-1 &
+copyq &
 keepassxc &
+kdeconnect-indicator &
 feh --no-fehbg --bg-fill --randomize ~/Pictures/Wallpapers/* &
 
 dwmblocks &

@@ -31,6 +31,10 @@ static const int colorfultag        = 1;        /* 0 means use SchemeSel for sel
 static const char *upvol[]   = { "/usr/bin/pactl", "set-sink-volume", "0", "+5%",     NULL };
 static const char *downvol[] = { "/usr/bin/pactl", "set-sink-volume", "0", "-5%",     NULL };
 static const char *mutevol[] = { "/usr/bin/pactl", "set-sink-mute",   "0", "toggle",  NULL };
+static const char *playpauseaudio[] = { "/usr/bin/playerctl", "play-pause",     NULL };
+static const char *stopaudio[] = { "/usr/bin/playerctl", "stop",  NULL };
+static const char *nextaudio[] = { "/usr/bin/playerctl", "next",  NULL };
+static const char *prevaudio[] = { "/usr/bin/playerctl", "previous",  NULL };
 static const char *light_up[] = {"/usr/bin/brightnessctl", "5%+", NULL};
 static const char *light_down[] = {"/usr/bin/brightnessctl", "5%-", NULL};
 static const int new_window_attach_on_end = 0; /*  1 means the new window will attach on the end; 0 means the new window will attach on the front,default is front */
@@ -90,6 +94,7 @@ static const Rule rules[] = {
     { "Firefox",  NULL,       NULL,       1 << 8,       0,           0,           -1 },
     { "KeePassXC",NULL,       NULL,       0,            0,           1,           -1 },
     { "Thunar",   NULL,       NULL,       0,            0,           1,           -1 },
+    { "copyq",    NULL,       NULL,       0,            0,           1,           -1 },
 };
 
 /* layout(s) */
@@ -139,9 +144,13 @@ static const Key keys[] = {
 
     // brightness and audio 
     {0,   XF86XK_AudioLowerVolume,    spawn, {.v = downvol}},
-	  {0,   XF86XK_AudioMute, spawn,    {.v = mutevol }},
 	  {0,   XF86XK_AudioRaiseVolume,    spawn, {.v = upvol}},
-	  {0,   XF86XK_MonBrightnessUp,     spawn, {.v = light_up}},
+    {0,   XF86XK_AudioMute,           spawn, {.v = mutevol}},
+    {0,   XF86XK_AudioPlay,           spawn, {.v = playpauseaudio}},
+    {0,   XF86XK_AudioNext,           spawn, {.v = nextaudio}},
+    {0,   XF86XK_AudioPrev,           spawn, {.v = prevaudio}},
+    {0,   XF86XK_AudioStop,           spawn, {.v = stopaudio}},
+ 	  {0,   XF86XK_MonBrightnessUp,     spawn, {.v = light_up}},
 	  {0,   XF86XK_MonBrightnessDown,   spawn, {.v = light_down}},
 
     // wallpaper changer keybinds
@@ -279,8 +288,8 @@ static const Button buttons[] = {
     { ClkClientWin,         MODKEY,         Button1,        moveorplace,    {.i = 0} },
     { ClkClientWin,         MODKEY,         Button2,        togglefloating, {0} },
     { ClkClientWin,         MODKEY,         Button3,        resizemouse,    {0} },
-    { ClkClientWin,         ControlMask,    Button1,        dragmfact,      {0} },
-    { ClkClientWin,         ControlMask,    Button3,        dragcfact,      {0} },
+    //{ ClkClientWin,         ControlMask,    Button1,        dragmfact,      {0} },
+    //{ ClkClientWin,         ControlMask,    Button3,        dragcfact,      {0} },
     { ClkTagBar,            0,              Button1,        view,           {0} },
     { ClkTagBar,            0,              Button3,        toggleview,     {0} },
     { ClkTagBar,            MODKEY,         Button1,        tag,            {0} },
